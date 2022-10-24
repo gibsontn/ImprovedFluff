@@ -18,11 +18,14 @@ public class FluffTracker : MonoBehaviour
     bool hasNeedle;
     bool hasHeart;
 
+    AudioSource rip;
+
     void Start()
     {
         delay = new WaitForSeconds(fluffLossSpeed);
         StartCoroutine(Waiter());
         player = GetComponent<Transform>();
+        rip = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -43,7 +46,8 @@ public class FluffTracker : MonoBehaviour
             //Debug.Log("dropping one fluff");
 
             //spawn fluff behind you
-            Instantiate(fluff, new Vector3(player.position.x, player.position.y+2f, player.position.z-1f), Quaternion.identity);
+            Instantiate(fluff, new Vector3(player.position.x, player.position.y+3f, player.position.z-3f), Quaternion.identity);
+           
 
             playerHealth--; //health change
             //text update
@@ -59,7 +63,6 @@ public class FluffTracker : MonoBehaviour
             playerHealth++;
             //Debug.Log("destroy piece");
             Destroy(other.gameObject); //fluff gets destroyed
-            
 
             //text update
             fluffText.text = "Fluff: " + playerHealth;
